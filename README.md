@@ -35,7 +35,7 @@ Using the debugger set a breakpoint after the string is created. Copy it to the 
         public string ExpiresIn { get; set; }
     }
 
-This allows me to do alter the classes to contain more info that my program needs and not have to exactly match the JSON they receive. Also, this my anal self to Pascal case my properties just like the beloved .NET guidelines calls for. Since I was in the meeting where we argued over these guidelines I feel confined to use them. Yes, I’m old and worked many years there. I’ll let you guess where ‘there’ is. ??
+This allows me to alter the classes to contain more info that my program needs and not have to exactly match the JSON they receive. You can also change the actual name and that allows me to Pascal case my properties just like the beloved .NET guidelines calls for. Since I was in the meeting where we argued over these guidelines I feel confined to use them. Yes, I’m old and worked many years there. I’ll let you guess where ‘there’ is. ??
 Again, I didn’t add the attributes by hand either. I wrote a quick and dirty app to do it for me. If you read this far and want the app use the email at the bottom and I’ll share it.
 
 WTF? WebRequest?

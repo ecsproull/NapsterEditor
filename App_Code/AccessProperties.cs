@@ -15,17 +15,15 @@ namespace CsharpSample.App_Code
         public static string ClientSecret { get { return <Your Secret >; } }
         //public static string CallbackUri { get { return "http://localhost:56182/home/LoginCallback"; } }
         public static string CallbackUri { get { return "http://edsview.azurewebsites.net/home/LoginCallback"; } }
-    }
-}
 
-public static async Task<string> GetToken()
-{
-    if (DateTime.Compare(ExpirationTime, DateTime.Now) != 1)
-    {
-        await LogInHelper.RefreshTokenAsync(RefreshToken);
-    }
+        public static async Task<string> GetToken()
+        {
+            if (DateTime.Compare(ExpirationTime, DateTime.Now) != 1)
+            {
+                await NapsterApiHelper.RefreshTokenAsync(RefreshToken);
+            }
 
-    return Token;
-}
+            return Token;
+        }
     }
 }

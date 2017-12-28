@@ -61,7 +61,7 @@ namespace CsharpSample.Controllers
                 DateTime expirationTime = DateTime.ParseExact(props.ExpirationTime, "O", CultureInfo.InvariantCulture);
                 if (AccessProperties.Token == null || DateTime.Compare(expirationTime, DateTime.Now) != 1)
                 {
-                    await LogInHelper.RefreshTokenAsync(props.RefreshToken);
+                    await NapsterApiHelper.RefreshTokenAsync(props.RefreshToken);
                 }
             }
         }
@@ -74,7 +74,7 @@ namespace CsharpSample.Controllers
                 DateTime expirationTime = DateTime.ParseExact(expire, "O", CultureInfo.InvariantCulture);
                 if (AccessProperties.Token == null || DateTime.Compare(expirationTime, DateTime.Now) != 1)
                 {
-                    await LogInHelper.RefreshTokenAsync(refresh);
+                    await NapsterApiHelper.RefreshTokenAsync(refresh);
                 }
 
                 AccessProps props = new AccessProps

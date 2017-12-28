@@ -3,3 +3,10 @@ CsharpSample/obj
 CsharpSample/bin
 
 /CsharpSample/Properties/PublishProfiles
+
+bin
+bower_components
+obj
+wwwroot/lib
+
+

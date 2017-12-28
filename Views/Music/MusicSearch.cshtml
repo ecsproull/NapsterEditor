@@ -1,0 +1,23 @@
+﻿@model Music
+
+@{
+    ViewData["Title"] = "Search Music";
+    Layout = "~/Views/Shared/_StartLayout.cshtml";
+    ViewBag.PageHeading = "Music";
+}
+
+<form action="/Music/DisplayGenreAsync" method="post">
+    @Html.LabelFor(m => m.SelectedGenreId)
+    @Html.DropDownListFor(m => m.SelectedGenreId, await Model.GetGenresListItems())
+    @Html.ValidationMessageFor(m => m.SelectedGenreId)
+    <button class="btn-login" type="submit">Submit</button>
+</form>
+
+@foreach (var m in Model.Albums)
+{
+    <h4>@m.Name, @m.ArtistName, @m.Released, @m.OriginallyReleased</h4>
+    @foreach (var t in Model.AlbumTracks[m.Id])
+    {
+        <p>@t.Name</p>
+    }
+}

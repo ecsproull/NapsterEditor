@@ -1,0 +1,34 @@
+﻿@model Index
+@{
+    Layout = "_StartLayout";
+    ViewBag.Title = "Index";
+    ViewBag.PageHeading = "Napster API Sample";
+}
+
+
+<div>
+    @foreach (var a in Model.Actions)
+    {
+        <div class="wide-menu-item">
+            <a href="@a.Url">@a.Name</a>
+        </div>
+    }
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+        var token = localStorage.getItem("accessToken");
+        var refreshToken = localStorage.getItem("refreshToken");
+        var expiration = localStorage.getItem("expiration");
+        if (token != null && refreshToken != null) {
+            $.get("/Home/UpdateAccessAsync", { "token": token, "refresh": refreshToken, "expire": expiration }, function (data) {
+                if (data && data != '') {
+                    var dataObject = JSON.parse(data);
+                        localStorage.setItem('accessToken', dataObject.Token);
+                        localStorage.setItem('refreshToken', dataObject.RefreshToken);
+                        localStorage.setItem('expiration', dataObject.ExpirationTime);
+                        localStorage.setItem('clientId', dataObject.ClientId);
+                }
+            });
+        }
+    </script>
+</div>

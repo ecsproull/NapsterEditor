@@ -1,0 +1,36 @@
+﻿@model GenresModel
+
+@{
+    ViewData["Title"] = "Genre Stations";
+    Layout = "~/Views/Shared/_StartLayout.cshtml";
+    ViewBag.PageHeading = "Stations";
+}
+
+<form action="/Home/DisplayStations" method="post">
+    <div>
+      @Html.DropDownListFor(m => m.SelectedGenreId, Model.GetGenresListItems(), new { @style = "height: 25px;" })
+      @Html.ValidationMessageFor(m => m.SelectedGenreId)
+    </div>
+    <button class="btn mt-3 mb-3" type="submit">Submit</button>
+</form>
+
+<table class="tracksTable">
+    <tr>
+        <th>Type</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Href</th>
+        <th>Description</th>
+
+    </tr>
+    @foreach (var m in Model.Stations)
+    {
+        <tr>
+            <td>@m.Type</td>
+            <td>@m.Id</td>
+            <td>@m.Name</td>
+            <td>@m.Href</td>
+            <td>@m.Description</td>
+        </tr>
+    }
+</table>

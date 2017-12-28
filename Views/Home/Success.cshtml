@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "Success";
+}
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet"
+          asp-href-include="/lib/bootstrap/dist/**/*.min.css"
+          asp-href-exclude="**/*-reboot*,**/*-grid*" />
+    <link rel="stylesheet" type="text/css" asp-href-include="~/CSS/*.css" />
+</head>
+<body>
+    <div class="container-fluid text-center">
+        <p><h3>Use navigation button above to see your playlists and edit them.</h3></p>
+    </div>
+</body>
+</html>

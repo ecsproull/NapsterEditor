@@ -1,0 +1,31 @@
+﻿@model GenresModel
+
+@{
+    Layout = "_StartLayout";
+    ViewBag.Title = "Genres";
+    ViewBag.PageHeading = "Genres";
+}
+
+<table class="tracksTable">
+    <tr>
+        <th>Type</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Href</th>
+        <th>Shortcut</th>
+        <th>Description</th>
+        <th>GenreLink Links</th>
+    </tr>
+    @foreach (var m in Model.Genres)
+    {
+        <tr>
+            <td>@m.Type</td>
+            <td>@m.Id</td>
+            <td>@m.Name</td>
+            <td>@m.Href</td>
+            <td>@m.Shortcut</td>
+            <td>@m.Description</td>
+            <td>@m.Links.ToString()</td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet"
+          asp-href-include="/lib/bootstrap/dist/**/*.min.css"
+          asp-href-exclude="**/*-reboot*,**/*-grid*" />
+    <link rel="stylesheet" type="text/css" asp-href-include="~/CSS/*.css" />
+    @RenderSection("JavaScript", required: false)
+</head>
+<body>
+    <div class="page-title" role="navigation">
+        <a href="/home/index">Home</a>
+        <p>@ViewBag.PageHeading</p>
+    </div>
+    <div class="container-fluid text-center">
+        @RenderBody()
+    </div>
+</body>
+</html>

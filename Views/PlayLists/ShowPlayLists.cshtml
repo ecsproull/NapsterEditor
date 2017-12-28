@@ -1,0 +1,24 @@
+﻿@model PlayLists
+
+@{
+    ViewData["Title"] = "Play Lists";
+    Layout = "~/Views/Shared/_StartLayout.cshtml";
+    ViewBag.PageHeading = "Playlists";
+}
+
+<div class="playlist">
+    <table class="tracksTable">
+        <tr>
+            <th>Title</th>
+            <th>Track Count</th>
+        </tr>
+        @foreach (var m in Model.Playlists)
+        {
+            <tr>
+                <td><a href="/PlayLists/ShowTracks?playlistId=@m.Id&trackCount=@m.TrackCount&playlistName=@m.Name">@m.Name</a></td>
+                <td>@m.TrackCount</td>
+            </tr>
+        }
+    </table>
+</div>
+

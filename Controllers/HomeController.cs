@@ -69,7 +69,7 @@ namespace CsharpSample.Controllers
         [HttpGet]
         public async Task<string> UpdateAccessAsync(string token, string refresh, string expire)
         {
-            if (token != "undefined")
+            if (token != "undefined" && token != AccessProperties.Token)
             {
                 DateTime expirationTime = DateTime.ParseExact(expire, "O", CultureInfo.InvariantCulture);
                 if (AccessProperties.Token == null || DateTime.Compare(expirationTime, DateTime.Now) != 1)

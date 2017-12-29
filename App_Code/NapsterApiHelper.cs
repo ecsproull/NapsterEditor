@@ -128,8 +128,9 @@ namespace CsharpSample.App_Code
         {
             string url = "https://api.napster.com/oauth/access_token?" + $"client_id={AccessProperties.ClientId}&client_secret={AccessProperties.ClientSecret}&response_type=code&grant_type=authorization_code&code=" + code;
             NapsterData root = await GetObjectAsync<NapsterData>(url, requestMethod: "POST");
-            AccessProperties.Token = root.AccessProperties;
+            AccessProperties.Token = root.AccessToken;
             AccessProperties.RefreshToken = root.RefreshToken;
+            AccessProperties.ExpirationTime = DateTime.Now.AddSeconds(Convert.ToDouble(root.ExpiresIn));
             return true;
         }
 
@@ -138,8 +139,9 @@ namespace CsharpSample.App_Code
         {
             string url = "https://api.napster.com/oauth/access_token?" + $"client_id={AccessProperties.ClientId}&client_secret={AccessProperties.ClientSecret}&response_type=code&grant_type=refresh_token&refresh_token={refreshToken}";
             NapsterData root = await GetObjectAsync<NapsterData>(url, requestMethod: "POST");
-            AccessProperties.Token = root.AccessProperties;
+            AccessProperties.Token = root.AccessToken;
             AccessProperties.RefreshToken = root.RefreshToken;
+            AccessProperties.ExpirationTime = DateTime.Now.AddSeconds(Convert.ToDouble(root.ExpiresIn));
             return true;
         }
 

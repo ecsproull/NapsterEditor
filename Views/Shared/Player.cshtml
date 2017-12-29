@@ -1,0 +1,8 @@
+﻿@model Tracks
+
+     <iframe name="player-frame"
+        id="player-frame"
+        src="http://api.napster.com/v1.1/player/index.html?apikey=@Model.ClientId"
+        frameborder="0"
+        onload="load('@Model.ClientId', '@Model.Token', '@Model.RefreshToken')"
+        style="display: block;"></iframe>

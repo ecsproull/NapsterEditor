@@ -16,7 +16,7 @@ namespace CsharpSample.App_Code
     public class NapsterData
     {
         [DataMember(Name = "access_token")]
-        public string AccessProperties { get; set; }
+        public string AccessToken { get; set; }
 
         [DataMember(Name = "refresh_token")]
         public string RefreshToken { get; set; }

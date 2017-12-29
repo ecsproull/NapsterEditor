@@ -11,10 +11,10 @@ namespace CsharpSample.App_Code
         public static string Token { get; set; } = null;
         public static string RefreshToken { get; set; } = null;
         public static DateTime ExpirationTime { get; set; }
-        public static string ClientId { get { return <Your Client ID>; } }
-        public static string ClientSecret { get { return <Your Secret >; } }
-        //public static string CallbackUri { get { return "http://localhost:56182/home/LoginCallback"; } }
-        public static string CallbackUri { get { return "http://edsview.azurewebsites.net/home/LoginCallback"; } }
+        public static string ClientId { get { return "NTAyN2ViN2QtYWNkOS00MjBjLWJjNmUtNGUxNThlNjA4MDdi"; } }
+        public static string ClientSecret { get { return "MWE4MWQxNDUtOGM0MC00MzNiLTg4YjQtNjllYjYxZDI1OThi"; } }
+        public static string CallbackUri { get { return "http://localhost:56182/home/LoginCallback"; } }
+        //public static string CallbackUri { get { return "http://edsview.azurewebsites.net/home/LoginCallback"; } }
 
         public static async Task<string> GetToken()
         {

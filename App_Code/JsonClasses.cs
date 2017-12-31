@@ -96,6 +96,20 @@ namespace CsharpSample.App_Code
 
     #endregion // Genre
 
+    #region Artists
+
+    [DataContract]
+    public class ArtistRootobject
+    {
+        [DataMember(Name = "artists")]
+        public Artist[] Artists { get; set; }
+
+        [DataMember(Name = "meta")]
+        public Meta Meta { get; set; }
+    }
+
+    #endregion
+
     #region Album
 
     [DataContract]
@@ -476,14 +490,13 @@ namespace CsharpSample.App_Code
         public Albumgroups AlbumGroups { get; set; }
 
         [DataMember(Name = "links")]
-        public ArtistLinks Links { get; set; }
+        public Links Links { get; set; }
 
         [DataMember(Name = "amg")]
         public string Amg { get; set; }
 
         [DataMember(Name = "bios")]
         public Bio[] Bios { get; set; }
-
     }
 
     [DataContract]
@@ -503,7 +516,7 @@ namespace CsharpSample.App_Code
     }
 
     [DataContract]
-    public class ArtistLinks
+    public class Links
     {
         [DataMember(Name = "albums")]
         public ArtistAlbums Albums { get; set; }
@@ -653,11 +666,11 @@ namespace CsharpSample.App_Code
         public bool FreePlayCompliant { get; set; }
 
         [DataMember(Name = "links")]
-        public Links Links { get; set; }
+        public PlayListArtistLinks Links { get; set; }
     }
 
     [DataContract]
-    public class Links
+    public class PlayListArtistLinks
     {
         [DataMember(Name = "members")]
         public Members Members { get; set; }

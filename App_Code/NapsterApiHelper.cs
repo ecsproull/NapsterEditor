@@ -10,7 +10,7 @@ namespace CsharpSample.App_Code
 {
     public static class NapsterApiHelper
     {
-        public static async Task<IEnumerable<Genre>> GetGenres()
+        public static async Task<IEnumerable<Genre>> GetGenresAsync()
         {
             string url = "https://api.napster.com/v2.2/genres";
             GenresRootItem root = await GetObjectAsync<GenresRootItem>(url);
@@ -18,21 +18,21 @@ namespace CsharpSample.App_Code
         }
 
 
-        public static async Task<IEnumerable<Station>> GetStationsForGenres(string genre)
+        public static async Task<IEnumerable<Station>> GetStationsForGenresAsync(string genre)
         {
             string url = $"https://api.napster.com/v2.2/genres/{genre}/stations";
             StationsRootobject root = await GetObjectAsync<StationsRootobject>(url);
             return root.Stations;
         }
 
-        public static async Task<IEnumerable<Track>> GetNewTracksForMe()
+        public static async Task<IEnumerable<Track>> GetNewTracksForMeAsync()
         {
             string url = $"https://api.napster.com/v2.2/me/personalized/tracks/new?limit=100";
             TrackRootobject root = await GetObjectAsync<TrackRootobject>(url, true);
             return root.Tracks;
         }
 
-        public static async Task<IEnumerable<Station>> GetStationsDetail(string url)
+        public static async Task<IEnumerable<Station>> GetStationsDetailAsync(string url)
         {
             StationsRootobject root = await GetObjectAsync<StationsRootobject>(url);
             return root.Stations;
@@ -43,6 +43,20 @@ namespace CsharpSample.App_Code
             string url = $"https://api.napster.com/v2.2/genres/{genre}/albums/new ";
             AlbumRootobject root = await GetObjectAsync<AlbumRootobject>(url);
             return root.Albums;
+        }
+
+        public static async Task<IEnumerable<Artist>> GetTopArtistsAsync()
+        {
+            string url = "https://api.napster.com/v2.2/artists/top";
+            ArtistRootobject root = await GetObjectAsync<ArtistRootobject>(url);
+            return root.Artists;
+        }
+
+        public static async Task<IEnumerable<Artist>> GetTopArtistsForGenreAsync(string genre)
+        {
+            string url = $"https://api.napster.com/v2.2/genres/{genre}/artists/top";
+            ArtistRootobject root = await GetObjectAsync<ArtistRootobject>(url);
+            return root.Artists;
         }
 
         public static async Task<IEnumerable<Track>> GetTracksAsync(string albumId)
@@ -186,6 +200,24 @@ namespace CsharpSample.App_Code
             else
             {
                 request.Headers.Add("apikey: " + AccessProperties.ClientId);
+            }
+        }
+
+        // This is used to get the JSON string which can be converted to C# classes.
+        // Use VS to paste as JSON or JSONToClasses.com
+        private static async Task<string> GetJsonStringAsync(string url, bool useToken = false, string requestMethod = "GET")
+        {
+            WebRequest request = WebRequest.Create(url);
+            request.Method = requestMethod;
+
+            await AddHeader(useToken, request);
+
+            WebResponse response = await request.GetResponseAsync();
+            using (Stream stream = response.GetResponseStream())
+            {
+                StreamReader sr = new StreamReader(stream);
+                string json = sr.ReadToEnd();
+                return json;
             }
         }
     }

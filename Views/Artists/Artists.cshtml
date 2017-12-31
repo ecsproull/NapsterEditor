@@ -1,0 +1,26 @@
+﻿@model ArtistsViewModel
+
+@{
+    ViewData["Title"] = "Genre Stations";
+    Layout = "~/Views/Shared/_StartLayout.cshtml";
+    ViewBag.PageHeading = "Stations";
+}
+
+
+<table class="tracksTable">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Href</th>
+        <th>Bio</th>
+    </tr>
+    @foreach (var m in Model.ArtistsList)
+    {
+        <tr>
+            <td>@m.Id</td>
+            <td>@m.Name</td>
+            <td>@m.Href</td>
+            <td>@m.Bios[0].Biography</td>
+        </tr>
+    }
+</table>

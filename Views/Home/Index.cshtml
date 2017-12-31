@@ -1,4 +1,4 @@
-﻿@model Index
+﻿@model IndexViewModel
 @{
     Layout = "_StartLayout";
     ViewBag.Title = "Index";
@@ -21,7 +21,6 @@
         var expiration = localStorage.getItem("expiration");
         if (token != null && refreshToken != null) {
             $.get("/Home/UpdateAccessAsync", { "token": token, "refresh": refreshToken, "expire": expiration }, function (data) {
-                alert("data is :" + data);
                 if (data && data != '') {
                     var dataObject = JSON.parse(data);
                     localStorage.setItem('accessToken', dataObject.Token);

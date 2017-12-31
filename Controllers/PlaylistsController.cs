@@ -10,18 +10,18 @@ namespace CsharpSample.Controllers
 {
     public class PlaylistsController : Controller
     {
-        private static Tracks currentModel;
+        private static TracksViewModel currentModel;
         public async Task<ActionResult> ShowPlaylists()
         {
             if (string.IsNullOrWhiteSpace(AccessProperties.Token))
             {
-                Login loginModel = new Login();
+                LoginViewModel loginModel = new LoginViewModel();
                 loginModel.ContinueUrl = "/Playlists/ShowPlaylists";
                 return RedirectToAction("Login", "Home");
             }
             else
             {
-                PlayLists model = new PlayLists();
+                PlayListsViewModel model = new PlayListsViewModel();
                 model.Playlists = await NapsterApiHelper.GetPlayListsAsync();
                 return View(model);
             }
@@ -29,7 +29,7 @@ namespace CsharpSample.Controllers
 
         public async Task<ViewResult> ShowTracks(string playlistId, int trackCount, string playlistName)
         {
-            currentModel = new Tracks
+            currentModel = new TracksViewModel
             {
                 TrackList = await NapsterApiHelper.GetPlayListTracksAsync(playlistId, trackCount),
                 PlayListName = playlistName,
@@ -133,7 +133,7 @@ namespace CsharpSample.Controllers
 
             if (dups.Count > 0)
             {
-                Tracks model = new Tracks
+                TracksViewModel model = new TracksViewModel
                 {
                     PlayListId = currentModel.PlayListId,
                     TrackList = dups,
@@ -177,7 +177,7 @@ namespace CsharpSample.Controllers
         }
 
         [HttpPost]
-        public ActionResult RemoveTracks(Tracks model)
+        public ActionResult RemoveTracks(TracksViewModel model)
         {
             List<Track> tracks = new List<Track>(currentModel.TrackList);
             foreach (Track td in model.TrackList)

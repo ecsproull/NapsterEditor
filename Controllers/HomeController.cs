@@ -21,25 +21,25 @@ namespace CsharpSample.Controllers
     {
         public ViewResult Index()
         {
-            return View(new Index());
+            return View(new IndexViewModel());
         }
 
         public async Task<ActionResult> GetGenres()
         {
-            GenresModel model = new GenresModel
+            GenresViewModel model = new GenresViewModel
             {
-                Genres = await NapsterApiHelper.GetGenres()
+                Genres = await NapsterApiHelper.GetGenresAsync()
             };
 
             return View(model);
         }
 
-        private static GenresModel genresModel;
+        private static GenresViewModel genresModel;
         public async Task<ViewResult> GetStationsForGenre()
         {
-            GenresModel model = new GenresModel
+            GenresViewModel model = new GenresViewModel
             {
-                Genres = await NapsterApiHelper.GetGenres()
+                Genres = await NapsterApiHelper.GetGenresAsync()
             };
 
             genresModel = model;
@@ -49,21 +49,8 @@ namespace CsharpSample.Controllers
         [HttpPost]
         public async Task<ViewResult> DisplayStations(string SelectedGenreId)
         {
-            genresModel.Stations = await NapsterApiHelper.GetStationsForGenres(SelectedGenreId);
+            genresModel.Stations = await NapsterApiHelper.GetStationsForGenresAsync(SelectedGenreId);
             return View("GetStationsForGenre", genresModel);
-        }
-
-        [HttpPost]
-        public async Task SetAccessAsync([FromBody] AccessProps props)
-        {
-            if (props.Token != null && props.Token != "undefined")
-            {
-                DateTime expirationTime = DateTime.ParseExact(props.ExpirationTime, "O", CultureInfo.InvariantCulture);
-                if (AccessProperties.Token == null || DateTime.Compare(expirationTime, DateTime.Now) != 1)
-                {
-                    await NapsterApiHelper.RefreshTokenAsync(props.RefreshToken);
-                }
-            }
         }
 
         [HttpGet]
@@ -95,14 +82,14 @@ namespace CsharpSample.Controllers
         {
             if (string.IsNullOrWhiteSpace(AccessProperties.Token))
             {
-                Login loginModel = new Login();
+                LoginViewModel loginModel = new LoginViewModel();
                 loginModel.ContinueUrl = "GetTracksForMe";
                 return View("Login", loginModel);
             }
 
-            Tracks model = new Tracks
+            TracksViewModel model = new TracksViewModel
             {
-                TrackList = await NapsterApiHelper.GetNewTracksForMe()
+                TrackList = await NapsterApiHelper.GetNewTracksForMeAsync()
             };
             
             return View("ShowTracks", model);
@@ -110,7 +97,7 @@ namespace CsharpSample.Controllers
 
         public ActionResult Login()
         {
-            Login model = new Login();
+            LoginViewModel model = new LoginViewModel();
             model.ContinueUrl = "Index";
             return View(model);
         }
@@ -124,7 +111,7 @@ namespace CsharpSample.Controllers
                 return View("Success");
             }
 
-            return View(new Login());
+            return View(new LoginViewModel());
         }
 
         public ViewResult Success()

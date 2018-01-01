@@ -2,18 +2,15 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
 
 namespace CsharpSample.Models
 {
-    public class GenresViewModel
+    public class GenrePickerViewModel
     {
         [Display(Name = "Genres")]
         public string SelectedGenreId { get; set; }
-        public GenrePickerViewModel GenrePickerModel { get; set; }
-        public IEnumerable<Station> Stations { get; set; } = new List<Station>();
+        public string SubmitUrl { get; set; }
         public IEnumerable<Genre> Genres { get; set; }
-
         public IEnumerable<SelectListItem> GetGenresListItems()
         {
             List<SelectListItem> GenreListItems = new List<SelectListItem>();

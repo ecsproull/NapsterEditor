@@ -1,31 +1,28 @@
 ﻿@model ArtistsViewModel
 
 @{
-    ViewData["Title"] = "Genre Stations";
+    ViewData["Title"] = "Top Artists for Genre";
     Layout = "~/Views/Shared/_StartLayout.cshtml";
-    ViewBag.PageHeading = "Stations";
+    ViewBag.PageHeading = "Top Artists";
 }
 
-<form action="/Artists/DisplayArtistsForGenre" method="post">
-    <div>
-        @Html.DropDownListFor(m => m.SelectedGenreId, Model.GetGenresListItems(), new { @style = "height: 25px;" })
-        @Html.ValidationMessageFor(m => m.SelectedGenreId)
-    </div>
-    <button class="btn mt-3 mb-3" type="submit">Submit</button>
-</form>
+@Html.Partial("GenrePicker", Model.GenrePickerModel);
 
-<table class="tracksTable">
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Href</th>
-    </tr>
-    @foreach (var m in Model.ArtistsList)
-    {
+@if (Model.ArtistsList.Count() != 0)
+{
+    <table class="tracksTable">
         <tr>
-            <td>@m.Id</td>
-            <td>@m.Name</td>
-            <td>@m.Href</td>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Bio</th>
         </tr>
-    }
-</table>
+        @foreach (var m in Model.ArtistsList)
+        {
+            <tr>
+                <td>@m.Id</td>
+                <td>@m.Name</td>
+                <td>@Html.Raw(@Model.GetArtistBio(m.Id))</td>
+            </tr>
+        }
+    </table>
+}

@@ -37,9 +37,16 @@ namespace CsharpSample.Controllers
         private static GenresViewModel genresModel;
         public async Task<ViewResult> GetStationsForGenre()
         {
+            GenrePickerViewModel pickerModel = new GenrePickerViewModel
+            {
+                Genres = await NapsterApiHelper.GetGenresAsync(),
+                SubmitUrl = "/Home/DisplayStations",
+            };
+
             GenresViewModel model = new GenresViewModel
             {
-                Genres = await NapsterApiHelper.GetGenresAsync()
+                Genres = await NapsterApiHelper.GetGenresAsync(),
+                GenrePickerModel = pickerModel
             };
 
             genresModel = model;

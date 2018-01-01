@@ -11,9 +11,45 @@ namespace CsharpSample.App_Code
     /// With the decorations in place the classes do not need to be complete.
     /// </summary>
 
+    #region base classes
+
+    [DataContract]
+    public class HRef
+    {
+        [DataMember(Name = "href")]
+        public string Href { get; set; }
+    }
+
+    [DataContract]
+    public class BaseItem : HRef
+    {
+        [DataMember(Name = "id")]
+        public string Id { get; set; }
+
+        [DataMember(Name = "type")]
+        public string Type { get; set; }
+
+        [DataMember(Name = "name")]
+        public string Name { get; set; }
+
+        [DataMember(Name = "links")]
+        public AlbumLinks Links { get; set; }
+    }
+
+    [DataContract]
+    public class LinkedItems
+    {
+        [DataMember(Name = "ids")]
+        public List<string> Ids { get; set; } = new List<string>();
+
+        [DataMember(Name = "href")]
+        public string Href { get; set; }
+    }
+
+#endregion
     #region Login
     [DataContract]
-    public class NapsterData
+    public sealed class NapsterData
     {
         [DataMember(Name = "access_token")]
         public string AccessToken { get; set; }
@@ -30,13 +66,8 @@ namespace CsharpSample.App_Code
     #region Genre
 
     [DataContract]
-    public sealed class GenreLinkItems
+    public sealed class GenreLinkItems : LinkedItems
     {
-        [DataMember(Name = "ids")]
-        public List<string> Ids { get; set; } = new List<string>();
-
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 
     [DataContract]
@@ -50,32 +81,17 @@ namespace CsharpSample.App_Code
     }
 
     [DataContract]
-    public sealed class Genre
+    public sealed class Genre : BaseItem
     {
-        [DataMember(Name = "type")]
-        public string Type { get; set; }
-
-        [DataMember(Name = "id")]
-        public string Id { get; set; }
-
-        [DataMember(Name = "name")]
-        public string Name { get; set; }
-
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
-
         [DataMember(Name = "shortcut")]
         public string Shortcut { get; set; }
 
         [DataMember(Name = "description")]
         public string Description { get; set; }
-
-        [DataMember(Name = "links")]
-        public GenreLink Links { get; set; }
     }
 
     [DataContract]
-    public class Meta
+    public sealed class Meta
     {
         [DataMember(Name = "totalCount")]
         public object TotalCount { get; set; }
@@ -99,7 +115,7 @@ namespace CsharpSample.App_Code
     #region Artists
 
     [DataContract]
-    public class ArtistRootobject
+    public sealed class ArtistRootobject
     {
         [DataMember(Name = "artists")]
         public Artist[] Artists { get; set; }
@@ -113,7 +129,7 @@ namespace CsharpSample.App_Code
     #region Album
 
     [DataContract]
-    public class AlbumRootobject
+    public sealed class AlbumRootobject
     {
         [DataMember(Name = "albums")]
         public Album[] Albums { get; set; }
@@ -123,25 +139,13 @@ namespace CsharpSample.App_Code
     }
 
     [DataContract]
-    public sealed class Album
+    public sealed class Album : BaseItem
     {
-        [DataMember(Name = "type")]
-        public string Type { get; set; }
-
-        [DataMember(Name = "id")]
-        public string Id { get; set; }
-
         [DataMember(Name = "upc")]
         public string Upc { get; set; }
 
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
-
         [DataMember(Name = "shortcut")]
         public string Shortcut { get; set; }
-
-        [DataMember(Name = "name")]
-        public string Name { get; set; }
 
         [DataMember(Name = "isStreamable")]
         public bool IsStreamable { get; set; }
@@ -185,19 +189,17 @@ namespace CsharpSample.App_Code
         [DataMember(Name = "discographies")]
         public Discographies Discographies { get; set; }
 
-        [DataMember(Name = "links")]
-        public AlbumLinks Links { get; set; }
     }
 
     [DataContract]
-    public class Contributingartists
+    public sealed class Contributingartists
     {
         [DataMember(Name = "primaryArtist")]
         public string PrimaryArtist { get; set; }
     }
 
     [DataContract]
-    public class Discographies
+    public sealed class Discographies
     {
         [DataMember(Name = "main")]
         public string[] Main { get; set; }
@@ -210,7 +212,7 @@ namespace CsharpSample.App_Code
     }
 
     [DataContract]
-    public class AlbumLinks
+    public sealed class AlbumLinks
     {
         [DataMember(Name = "images")]
         public Images Images { get; set; }
@@ -232,44 +234,28 @@ namespace CsharpSample.App_Code
     }
 
     [DataContract]
-    public class Images
+    public sealed class Images : HRef
     {
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 
     [DataContract]
-    public class AlbumLinksTrackLinks
+    public sealed class AlbumLinksTrackLinks : HRef
     {
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 
     [DataContract]
-    public class Posts
+    public sealed class Posts : HRef
     {
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 
     [DataContract]
-    public class Artists
+    public sealed class Artists : LinkedItems
     {
-        [DataMember(Name = "ids")]
-        public string[] Ids { get; set; }
-
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 
     [DataContract]
-    public class Reviews
+    public sealed class Reviews : LinkedItems
     {
-        [DataMember(Name = "ids")]
-        public string[] Ids { get; set; }
-
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 
     #endregion //Album
@@ -277,7 +263,7 @@ namespace CsharpSample.App_Code
     #region Tracks
 
     [DataContract]
-    public class TrackRootobject
+    public sealed class TrackRootobject
     {
         [DataMember(Name = "meta")]
         public Meta Meta { get; set; }
@@ -287,22 +273,13 @@ namespace CsharpSample.App_Code
     }
 
     [DataContract]
-    public class Track
+    public sealed class Track : BaseItem
     {
-        [DataMember(Name = "type")]
-        public string Type { get; set; }
-
-        [DataMember(Name = "id")]
-        public string Id { get; set; }
-
         [DataMember(Name = "index")]
         public int Index { get; set; }
 
         [DataMember(Name = "disc")]
         public int Disc { get; set; }
-
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
 
         [DataMember(Name = "playbackSeconds")]
         public int PlaybackSeconds { get; set; }
@@ -312,9 +289,6 @@ namespace CsharpSample.App_Code
 
         [DataMember(Name = "isStreamable")]
         public bool IsStreamable { get; set; }
-
-        [DataMember(Name = "name")]
-        public string Name { get; set; }
 
         [DataMember(Name = "isrc")]
         public string Isrc { get; set; }
@@ -343,9 +317,6 @@ namespace CsharpSample.App_Code
         [DataMember(Name = "contributors")]
         public Contributors Contributors { get; set; }
 
-        [DataMember(Name = "links")]
-        public TrackLinks Links { get; set; }
-
         [DataMember(Name = "previewURL")]
         public string PreviewURL { get; set; }
 
@@ -354,14 +325,14 @@ namespace CsharpSample.App_Code
     }
 
     [DataContract]
-    public class Contributors
+    public sealed class Contributors
     {
         [DataMember(Name = "primaryArtist")]
         public string PrimaryArtist { get; set; }
     }
 
     [DataContract]
-    public class TrackLinks
+    public sealed class TrackLinks
     {
         [DataMember(Name = "artists")]
         public Artists Artists { get; set; }
@@ -377,37 +348,22 @@ namespace CsharpSample.App_Code
     }
 
     [DataContract]
-    public class Albums
+    public sealed class Albums : LinkedItems
     {
-        [DataMember(Name = "ids")]
-        public string[] Ids { get; set; }
-
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 
     [DataContract]
-    public class Genres
+    public sealed class Genres : LinkedItems
     {
-        [DataMember(Name = "ids")]
-        public string[] Ids { get; set; }
-
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 
     [DataContract]
-    public class Tags
+    public sealed class Tags : LinkedItems
     {
-        [DataMember(Name = "ids")]
-        public string[] Ids { get; set; }
-
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 
     [DataContract]
-    public class Format
+    public sealed class Format
     {
         [DataMember(Name = "type")]
         public string Type { get; set; }
@@ -424,7 +380,7 @@ namespace CsharpSample.App_Code
     #region search
 
     [DataContract]
-    public class SearchRootobject
+    public sealed class SearchRootobject
     {
         [DataMember(Name = "meta")]
         public Meta Meta { get; set; }
@@ -434,7 +390,7 @@ namespace CsharpSample.App_Code
     }
 
     [DataContract]
-    public class Search
+    public sealed class Search
     {
         [DataMember(Name = "query")]
         public string Query { get; set; }
@@ -447,7 +403,7 @@ namespace CsharpSample.App_Code
     }
 
     [DataContract]
-    public class Data
+    public sealed class Data
     {
         [DataMember(Name = "tracks")]
         public Track[] Tracks { get; set; }
@@ -466,20 +422,8 @@ namespace CsharpSample.App_Code
     }
 
     [DataContract]
-    public class Artist
+    public sealed class Artist : BaseItem
     {
-        [DataMember(Name = "type")]
-        public string Type { get; set; }
-
-        [DataMember(Name = "id")]
-        public string Id { get; set; }
-
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
-
-        [DataMember(Name = "name")]
-        public string Name { get; set; }
-
         [DataMember(Name = "shortcut")]
         public string Shortcut { get; set; }
 
@@ -489,9 +433,6 @@ namespace CsharpSample.App_Code
         [DataMember(Name = "albumGroups")]
         public Albumgroups AlbumGroups { get; set; }
 
-        [DataMember(Name = "links")]
-        public Links Links { get; set; }
-
         [DataMember(Name = "amg")]
         public string Amg { get; set; }
 
@@ -500,7 +441,7 @@ namespace CsharpSample.App_Code
     }
 
     [DataContract]
-    public class Albumgroups
+    public sealed class Albumgroups
     {
         [DataMember(Name = "singlesAndEPs")]
         public string[] SinglesAndEPs { get; set; }
@@ -516,7 +457,7 @@ namespace CsharpSample.App_Code
     }
 
     [DataContract]
-    public class Links
+    public sealed class Links
     {
         [DataMember(Name = "albums")]
         public ArtistAlbums Albums { get; set; }
@@ -550,71 +491,42 @@ namespace CsharpSample.App_Code
     }
 
     [DataContract]
-    public class ArtistAlbums
+    public sealed class ArtistAlbums : HRef
     {
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 
     [DataContract]
-    public class Toptracks
+    public sealed class Toptracks : HRef
     {
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 
     [DataContract]
-    public class Stations
+    public sealed class Stations : LinkedItems
     {
-        [DataMember(Name = "ids")]
-        public string[] Ids { get; set; }
-
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 
     [DataContract]
-    public class Contemporaries
+    public sealed class Contemporaries : LinkedItems
     {
-        [DataMember(Name = "ids")]
-        public string[] Ids { get; set; }
-
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 
     [DataContract]
-    public class Followers
+    public sealed class Followers : LinkedItems
     {
-        [DataMember(Name = "ids")]
-        public string[] Ids { get; set; }
-
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 
     [DataContract]
-    public class Influences
+    public sealed class Influences : LinkedItems
     {
-        [DataMember(Name = "ids")]
-        public string[] Ids { get; set; }
-
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 
     [DataContract]
-    public class Relatedprojects
+    public sealed class Relatedprojects : LinkedItems
     {
-        [DataMember(Name = "ids")]
-        public string[] Ids { get; set; }
-
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 
     [DataContract]
-    public class Bio
+    public sealed class Bio
     {
         [DataMember(Name = "title")]
         public string Title { get; set; }
@@ -630,22 +542,10 @@ namespace CsharpSample.App_Code
     }
 
     [DataContract]
-    public class Playlist
+    public sealed class Playlist : BaseItem
     {
-        [DataMember(Name = "type")]
-        public string Type { get; set; }
-
-        [DataMember(Name = "id")]
-        public string Id { get; set; }
-
-        [DataMember(Name = "name")]
-        public string Name { get; set; }
-
         [DataMember(Name = "modified")]
         public string Modified { get; set; }
-
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
 
         [DataMember(Name = "trackCount")]
         public int TrackCount { get; set; }
@@ -664,13 +564,10 @@ namespace CsharpSample.App_Code
 
         [DataMember(Name = "freePlayCompliant")]
         public bool FreePlayCompliant { get; set; }
-
-        [DataMember(Name = "links")]
-        public PlayListArtistLinks Links { get; set; }
     }
 
     [DataContract]
-    public class PlayListArtistLinks
+    public sealed class PlayListArtistLinks
     {
         [DataMember(Name = "members")]
         public Members Members { get; set; }
@@ -686,34 +583,22 @@ namespace CsharpSample.App_Code
     }
 
     [DataContract]
-    public class Members
+    public sealed class Members : LinkedItems
     {
-        [DataMember(Name = "ids")]
-        public string[] Ids { get; set; }
-
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 
     [DataContract]
-    public class LinkedTracks
+    public sealed class LinkedTracks : HRef
     {
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 
     [DataContract]
-    public class Sampleartists
+    public sealed class Sampleartists : LinkedItems
     {
-        [DataMember(Name = "ids")]
-        public string[] Ids { get; set; }
-
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 
     [DataContract]
-    public class Image
+    public sealed class Image
     {
         [DataMember(Name = "type")]
         public string Type { get; set; }
@@ -748,7 +633,7 @@ namespace CsharpSample.App_Code
     #region stations
 
     [DataContract]
-    public class StationsRootobject
+    public sealed class StationsRootobject
     {
         [DataMember(Name = "meta")]
         public Meta Meta { get; set; }
@@ -758,22 +643,10 @@ namespace CsharpSample.App_Code
     }
 
     [DataContract]
-    public class Station
+    public sealed class Station : BaseItem
     {
-        [DataMember(Name = "id")]
-        public string Id { get; set; }
-
-        [DataMember(Name = "type")]
-        public string Type { get; set; }
-
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
-
         [DataMember(Name = "subType")]
         public string SubType { get; set; }
-
-        [DataMember(Name = "name")]
-        public string Name { get; set; }
 
         [DataMember(Name = "author")]
         public string Author { get; set; }
@@ -786,13 +659,10 @@ namespace CsharpSample.App_Code
 
         [DataMember(Name = "artists")]
         public string Artists { get; set; }
-
-        [DataMember(Name = "links")]
-        public Links Links { get; set; }
     }
 
     [DataContract]
-    public class StationLinks
+    public sealed class StationLinks
     {
         [DataMember(Name = "genres")]
         public Genres Genres { get; set; }
@@ -805,17 +675,13 @@ namespace CsharpSample.App_Code
     }
 
     [DataContract]
-    public class Mediumimage
+    public sealed class Mediumimage : HRef
     {
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 
     [DataContract]
-    public class Largeimage
+    public sealed class Largeimage : HRef
     {
-        [DataMember(Name = "href")]
-        public string Href { get; set; }
     }
 
     #endregion

@@ -38,6 +38,8 @@ Using the debugger set a breakpoint after the string is created. Copy it to the 
 This allows me to alter the classes to contain more info that my program needs and not have to exactly match the JSON they receive. You can also change the actual name and that allows me to Pascal case my properties just like the beloved .NET guidelines calls for. Since I was in the meeting where we argued over these guidelines I feel confined to use them. Yes, I’m old and worked many years there. I’ll let you guess where ‘there’ is. 😊
 Again, I didn’t add the attributes by hand either. I wrote a quick and dirty app to do it for me. If you read this far and want the app use the email at the bottom and I’ll share it.
 
+BEWARE! with the docorations you will almost never fail JSON conversion. The conversion does what it can and ignores the rest. This can lead to missing data. It is just a design decision / trade off. Each choice has its pitfalls. Choose wisely!
+
 WTF? WebRequest?
 With the array of choices, I chose the bottom feeder. If you decide you want to switch this to HttpWebRequest or any other .NET derivative you won’t have to change much. All the others derive from it. http://www.karthikscorner.com/sharepoint/webrequest-vs-httpwebrequest-vs-webclient-vs-httpclient/ 
 Keep in mind that WebRequest throws exceptions on error and you won’t see much use of try/catch. There are two top reasons for this. Either the code is perfect, or the developer is lazy. This is a sample and not production code. It is your job to make it perfect. 

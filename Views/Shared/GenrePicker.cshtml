@@ -1,0 +1,16 @@
+﻿
+@model GenrePickerViewModel
+
+<form action="@Model.SubmitUrl" method="post">
+    <div>
+        @Html.DropDownListFor(m => m.SelectedGenreId, Model.GetGenresListItems(),
+           new { @style = "height: 35px; " +
+                          "font-size: 18px; " +
+                          "-webkit-border-radius: 10px;" +
+                          "border-style: solid;" +
+                          "border-width: 2px;" +
+                          "border-color: #aaa;" })
+        @Html.ValidationMessageFor(m => m.SelectedGenreId)
+    </div>
+    <button class="btn-login" type="submit">Submit</button>
+</form>

@@ -2,29 +2,29 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+
 
 namespace CsharpSample.Models
 {
     public class ArtistsViewModel
     {
-        [Display(Name = "Genres")]
-        public string SelectedGenreId { get; set; }
         public IEnumerable<Artist> ArtistsList { get; set; } = new List<Artist>();
-        public IEnumerable<Genre> Genres { get; set; }
-        public IEnumerable<SelectListItem> GetGenresListItems()
+        public GenrePickerViewModel GenrePickerModel { get; set; }
+
+        public string GetArtistBio(string artistId)
         {
-            List<SelectListItem> GenreListItems = new List<SelectListItem>();
-
-            foreach (Genre g in Genres)
+            IEnumerable<IEnumerable<Bio>> bioList = from a in ArtistsList
+                            where a.Id == artistId
+                            select a.Bios;
+            if (bioList.ElementAt(0) != null && bioList.ElementAt(0).ElementAt(0) != null)
             {
-                GenreListItems.Add(new SelectListItem
-                {
-                    Value = g.Id,
-                    Text = g.Name
-                });
+                return bioList.ElementAt(0).ElementAt(0).Biography;
             }
-
-            return GenreListItems;
+            else
+            {
+                return "No biography available.";
+            }
         }
     }
 }

@@ -20,13 +20,18 @@ namespace CsharpSample.Controllers
         private static ArtistsViewModel artistsModel;
         public async Task<ViewResult> GetArtistsForGenre()
         {
-            ArtistsViewModel model = new ArtistsViewModel
+            GenrePickerViewModel pickerModel = new GenrePickerViewModel
             {
-                Genres = await NapsterApiHelper.GetGenresAsync()
+                Genres = await NapsterApiHelper.GetGenresAsync(),
+                SubmitUrl = "/Artists/DisplayArtistsForGenre",
             };
 
-            artistsModel = model;
-            return View("TopArtistsForGenre", model);
+            artistsModel = new ArtistsViewModel
+            {
+                GenrePickerModel = pickerModel
+            };
+
+            return View("TopArtistsForGenre", artistsModel);
         }
 
         [HttpPost]

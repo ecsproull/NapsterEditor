@@ -396,29 +396,29 @@ namespace CsharpSample.App_Code
         public string Query { get; set; }
 
         [DataMember(Name = "data")]
-        public Data Data { get; set; }
+        public SearchData Data { get; set; }
 
         [DataMember(Name = "order")]
         public string[] Order { get; set; }
     }
 
     [DataContract]
-    public sealed class Data
+    public sealed class SearchData
     {
         [DataMember(Name = "tracks")]
-        public Track[] Tracks { get; set; }
+        public IEnumerable<Track> Tracks { get; set; } = new List<Track>();
 
         [DataMember(Name = "albums")]
-        public Album[] Albums { get; set; }
+        public IEnumerable<Album> Albums { get; set; } = new List<Album>();
 
         [DataMember(Name = "artists")]
-        public Artist[] Artists { get; set; }
+        public IEnumerable<Artist> Artists { get; set; } = new List<Artist>();
 
         [DataMember(Name = "playlists")]
-        public Playlist[] Playlists { get; set; }
+        public IEnumerable<Playlist> Playlists { get; set; } = new List<Playlist>();
 
         [DataMember(Name = "tags")]
-        public Tags[] Taglist { get; set; }
+        public IEnumerable<Tags> Taglist { get; set; } = new List<Tags>();
     }
 
     [DataContract]

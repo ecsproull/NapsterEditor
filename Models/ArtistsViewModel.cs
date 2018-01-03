@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace CsharpSample.Models
 {
-    public class ArtistsViewModel
+    public class ArtistsViewModel : BaseViewModel
     {
         public IEnumerable<Artist> ArtistsList { get; set; } = new List<Artist>();
         public GenrePickerViewModel GenrePickerModel { get; set; }

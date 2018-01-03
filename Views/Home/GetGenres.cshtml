@@ -8,18 +8,14 @@
 
 <table class="tracksTable">
     <tr>
-        <th>Id</th>
         <th>Name</th>
-        <th>Href</th>
         <th>Description</th>
     </tr>
     @foreach (var m in Model.Genres)
     {
         <tr>
-            <td>@m.Id</td>
-            <td>@m.Name</td>
-            <td>@m.Href</td>
-            <td>@m.Description</td>
+            <td style="min-width: 200px">@m.Name</td>
+            <td>@Html.Raw(@m.Description)</td>
         </tr>
     }
 </table>

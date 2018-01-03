@@ -1,0 +1,317 @@
+﻿body {
+    background-color: #ddd;
+    color: #222;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    margin: 0;
+    line-height: 1;
+    align-content: center;
+}
+
+h1 {
+    text-align:center;
+}
+
+h2, h3 {
+    text-align:left;
+    font-family:'Times New Roman', Times, serif
+}
+
+.text-box{
+    border-color: #bbb;
+    border-width: 4px;
+    border-radius: 8px;
+    font-size: 18px;
+    width:auto;
+    min-width: 500px;
+}
+
+
+.page-title {
+    background-color: #999;
+    border: 1px solid #999999;
+    border-radius: 15px;
+    display:block;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px 18px 35px 18px;
+    padding: 12px 0 0 0;
+    -webkit-border-radius: 12px;
+}
+
+    .page-title a {
+        display: inline-block;
+        float: left;
+        margin-left: 10px;
+        margin-top: -4px;
+        background: #aaa;
+        border: 1px solid #999999;
+        border-radius: 8px;
+        padding: 2px 4px;
+    }
+
+    .page-title p {
+        display: inline-block;
+        margin-left: -80px;
+    }
+
+.tool-btn {
+    position: relative;
+    margin-left:auto;
+    margin-right: 10px;
+    line-height: 40px;
+    font-size: 25px;
+    font-weight:bold;
+}
+
+.lg-rnd-border {
+    border-style: solid;
+    border-width: 3px;
+    border-color: #aaa;
+    border-radius: 20px;
+}
+
+.framediv {
+    background-color: green;
+    color: aqua;
+    height: 100px;
+    width: 200px;
+    align-self: center;
+}
+
+.LoginFrame {
+    border-color: #aaa;
+    border-width: 4px;
+    border-style: solid;
+    height: 600px;
+    width: 600px;
+    padding: 5px;
+    border-radius: 15px;
+}
+.logOn {
+    margin: 0;
+    padding: 0;
+}
+
+    .logOn h1 {
+        background-color: #ccc;
+        border-bottom: 1px solid #666;
+        color: #222;
+        display: block;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 10px 0;
+        text-align: center;
+        text-decoration: none;
+        -webkit-border-radius: 10px;
+    }
+
+.login-section {
+    background-color: #ccc;
+    border-bottom: 1px solid #666;
+    color: #222;
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 10px 0;
+    text-align: center;
+    -webkit-border-radius: 10px;
+}
+
+.btn-disabled {
+    display: none;
+}
+
+.disclaimer {
+    font-weight: bold;
+}
+
+.btn-login {
+    height: 40px;
+    width: 100px;
+    font-size: 25px;
+    font-weight: bold;
+    -webkit-border-radius: 10px;
+    margin: 10px 0;
+}
+
+.btn-submit {
+    height: 50px;
+    width: 100px;
+    font-size: 25px;
+    font-weight: bold;
+    -webkit-border-radius: 10px;
+    margin: 10px 0;
+}
+
+.btn-playlists {
+    line-height: 100px;
+    margin-top: 15px;
+    border-color: #444;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 6px;
+    font-size: 20px;
+}
+
+.wide-menu-item {
+    display: block;
+    line-height: 50px;
+    margin-top: 15px;
+    border-color: #444;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 15px;
+    font-size: 20px;
+    background-color: #ccc;
+}
+
+.result {
+    background-color: #ccc;
+    border-bottom: 1px solid #666;
+    color: #222;
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 0;
+    text-align: center;
+    text-decoration: none;
+    -webkit-border-radius: 10px;
+}
+
+    .result dl dd {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+.playlist, .tracks {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    border-color: black;
+    border-width: 0 0 1px 0;
+    -webkit-border-radius: 8px;
+}
+
+    .tracks h2 {
+        padding: 15px 0;
+        font-size: 30px;
+    }
+
+    .tracks button {
+        -webkit-border-radius: 6px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#999));
+        font-size: 24px;
+    }
+
+    .playlist ul li:first-child, .tracks ul li:first-child {
+        -webkit-border-top-left-radius: 8px;
+        -webkit-border-top-right-radius: 8px;
+    }
+
+    .playlist ul li:last-child, .tracks ul li:last-child {
+        -webkit-border-bottom-left-radius: 8px;
+        -webkit-border-bottom-right-radius: 8px;
+    }
+
+    .playlist ul, .tracks ul, .tracks tr  {
+        margin: 10px;
+        padding: 0px;
+    }
+
+
+        .playlist ul li, .tracks ul li, .tracks tbody tr td {
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#999));
+            border: 1px solid #999999;
+            display: block;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: -1px;
+            padding: 12px 10px;
+        }
+
+            .playlist ul li a, .tracks ul li a {
+                color: #222222;
+                text-decoration: none;
+            }
+
+.backButton {
+    padding: 10px 0;
+    margin: 10px 0;
+}
+
+.tracksTable  [type=checkbox] {
+    filter: invert(100%) hue-rotate(18deg) brightness(1.7);
+    height: 20px;
+    width: 30px;
+}
+
+.progress {
+    -webkit-border-radius: 10px;
+    background-color: rgba(0,0,0,.7);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    height: 80px;
+    width: 200px;
+    left: 60px;
+    top: 120px;
+    line-height: 80px;
+    margin: 0 auto;
+    position: absolute;
+    text-align: center;
+}
+
+.tracksTable {
+    font-size: 18px;
+    text-align: center;
+    padding: 12px 0 0 0;
+    width: 100%;
+}
+
+    .tracksTable td, .tracksTable tr {
+        padding: 8px;
+    }
+
+    .tracksTable tbody th:first-child {
+        border-radius: 16px 0 0 0;
+    }
+
+    .tracksTable tbody th {
+        text-align: center;
+    }
+
+    .tracksTable tbody th:last-child {
+        border-radius: 0 16px 0 0;
+        padding: 10px 10px;
+    }
+
+    .tracksTable tbody tr:last-child {
+        border-radius: 0 0 16px 0;
+    }
+
+
+        .tracksTable tbody tr:last-child td:first-child {
+            border-radius: 0 0 0 16px;
+        }
+
+        .tracksTable tbody tr:last-child td:last-child {
+            border-radius: 0 0 16px 0;
+        }
+
+    .tracksTable tbody tr:nth-child(even) {
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#999));
+    }
+    .tracksTable tbody tr:nth-child(odd) {
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#bbb), to(#fff));
+    }
+
+    .tracksTable tbody tr:hover {
+        background-color: #ddd;
+    }
+
+.userName {
+    margin-top: 10px;
+}

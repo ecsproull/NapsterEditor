@@ -21,7 +21,12 @@ namespace CsharpSample.Controllers
     {
         public ViewResult Index()
         {
-            return View(new IndexViewModel());
+            IndexViewModel model = new IndexViewModel
+            {
+                ShowNavButton = false
+            };
+
+            return View(model);
         }
 
         public async Task<ActionResult> GetGenres()
@@ -63,14 +68,17 @@ namespace CsharpSample.Controllers
         [HttpGet]
         public async Task<string> UpdateAccessAsync(string token, string refresh, string expire)
         {
-            if (token != "undefined" && token != AccessProperties.Token)
+            if (token != "undefined" && token != null && token != AccessProperties.Token)
             {
                 DateTime expirationTime = DateTime.ParseExact(expire, "O", CultureInfo.InvariantCulture);
                 if (AccessProperties.Token == null || DateTime.Compare(expirationTime, DateTime.Now) != 1)
                 {
                     await NapsterApiHelper.RefreshTokenAsync(refresh);
                 }
+            }
 
+            if (!string.IsNullOrEmpty(AccessProperties.Token))
+            {
                 AccessProps props = new AccessProps
                 {
                     Token = AccessProperties.Token,
@@ -96,13 +104,15 @@ namespace CsharpSample.Controllers
 
             TracksViewModel model = new TracksViewModel
             {
-                TrackList = await NapsterApiHelper.GetNewTracksForMeAsync()
+                TrackList = await NapsterApiHelper.GetNewTracksForMeAsync(),
+                OnNavigateReturnUrl = "/home/GetTracksForMe",
+                ShowArtistName = true
             };
             
             return View("ShowTracks", model);
         }
 
-        public ActionResult Login()
+        public ActionResult Login(string routeValue)
         {
             LoginViewModel model = new LoginViewModel();
             model.ContinueUrl = "Index";

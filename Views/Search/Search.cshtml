@@ -1,0 +1,50 @@
+﻿@model SearchViewModel
+
+@{
+    ViewData["Title"] = "Search";
+    Layout = "~/Views/Shared/_StartLayout.cshtml";
+    ViewBag.PageHeading = "Search";
+}
+
+@section JavaScript {
+    <script type="text/javascript" src="~/JS/Audio.js"></script>
+}
+
+@using (Html.BeginForm("DoSearch", "Search", FormMethod.Post))
+{
+    <div>
+        @Html.TextBoxFor(m => m.SearchString, null, new { @class = "text-box" })
+    </div>
+    <button class="btn-login" type="submit">Submit</button>
+}
+
+@if (Model.Data != null && Model.Data.Tracks.Count() != 0)
+{
+    <h2>Tracks</h2>
+    @Html.Partial("Tracks", Model.Tracks)
+}
+
+@if (Model.Data != null && Model.Data.Albums.Count() != 0)
+{
+    <h2>Albums</h2>
+    <table class="tracksTable">
+        <tr>
+            <th>Name</th>
+            <th>Released</th>
+            <th>Track Count</th>
+        </tr>
+        @foreach (var m in Model.Data.Albums)
+        {
+            <tr>
+                <td><a href="/Search/ShowAlbumDetails?albumId=@m.Id&returnUrl=@Model.OnNavigateReturnUrl">@m.Name</a></td>
+                <td>@m.Released.Substring(0,10)</td>
+                <td>@m.TrackCount</td>
+            </tr>
+        }
+    </table>
+}
+
+<audio 
+        id="preview-player"
+        frameborder="0"
+        style="display: block;" autoplay></audio>

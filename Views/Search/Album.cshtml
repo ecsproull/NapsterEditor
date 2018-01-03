@@ -1,0 +1,18 @@
+﻿@model AlbumViewModel
+
+@{
+    ViewData["Title"] = "Album";
+    Layout = "~/Views/Shared/_StartLayout.cshtml";
+    ViewBag.PageHeading = "Album";
+}
+
+@section JavaScript {
+    <script type="text/javascript" src="~/JS/Audio.js"></script>
+}
+
+<div>
+    <h1>@Model.AlbumDetails.Name</h1>
+    <h2>@Model.AlbumDetails.ArtistName</h2>
+    <h3>Tracks:</h3>
+</div>
+@Html.Partial("Tracks", Model.Tracks)

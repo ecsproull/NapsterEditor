@@ -2,7 +2,7 @@
 
 namespace CsharpSample.Models
 {
-    public class LoginViewModel
+    public class LoginViewModel : BaseViewModel
     {
         public string LoginSrc { get { return $"https://api.napster.com/oauth/authorize?client_id={AccessProperties.ClientId}&response_type=code&redirect_uri={AccessProperties.CallbackUri}"; } }
         public string ContinueUrl { get; set; }

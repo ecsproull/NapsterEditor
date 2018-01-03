@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CsharpSample.Models
 {
-    public class PlayListsViewModel
+    public class PlayListsViewModel : BaseViewModel
     {
         public IEnumerable<Playlist> Playlists { get; set; }
     }

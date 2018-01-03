@@ -66,6 +66,13 @@ namespace CsharpSample.App_Code
             return root.Tracks;
         }
 
+        public static async Task<Album> GetAlbumAsync(string albumId)
+        {
+            string url = $"https://api.napster.com/v2.2/albums/{albumId}";
+            AlbumRootobject root = await GetObjectAsync<AlbumRootobject>(url);
+            return root.Albums[0];
+        }
+
         public static async Task<List<Playlist>> GetPlayListsAsync()
         {
             string url = "https://api.napster.com/v2.2/me/library/playlists";
@@ -117,7 +124,7 @@ namespace CsharpSample.App_Code
             return retVal;
         }
 
-        public static async Task<Data> SearchAsync(string query, QueryType type, bool verbose = true)
+        public static async Task<SearchData> SearchAsync(string query, QueryType type, bool verbose = true)
         {
             string url;
             if (verbose || query.Contains(" "))
@@ -142,9 +149,7 @@ namespace CsharpSample.App_Code
         {
             string url = "https://api.napster.com/oauth/access_token?" + $"client_id={AccessProperties.ClientId}&client_secret={AccessProperties.ClientSecret}&response_type=code&grant_type=authorization_code&code=" + code;
             NapsterData root = await GetObjectAsync<NapsterData>(url, requestMethod: "POST");
-            AccessProperties.Token = root.AccessToken;
-            AccessProperties.RefreshToken = root.RefreshToken;
-            AccessProperties.ExpirationTime = DateTime.Now.AddSeconds(Convert.ToDouble(root.ExpiresIn));
+            SetAccessProperties(root);
             return true;
         }
 
@@ -153,10 +158,15 @@ namespace CsharpSample.App_Code
         {
             string url = "https://api.napster.com/oauth/access_token?" + $"client_id={AccessProperties.ClientId}&client_secret={AccessProperties.ClientSecret}&response_type=code&grant_type=refresh_token&refresh_token={refreshToken}";
             NapsterData root = await GetObjectAsync<NapsterData>(url, requestMethod: "POST");
+            SetAccessProperties(root);
+            return true;
+        }
+
+        private static void SetAccessProperties(NapsterData root)
+        {
             AccessProperties.Token = root.AccessToken;
             AccessProperties.RefreshToken = root.RefreshToken;
             AccessProperties.ExpirationTime = DateTime.Now.AddSeconds(Convert.ToDouble(root.ExpiresIn));
-            return true;
         }
 
         private static async Task<T> GetObjectAsync<T>(string url, bool useToken = false, string requestMethod = "GET")

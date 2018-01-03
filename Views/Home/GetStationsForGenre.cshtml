@@ -12,7 +12,6 @@
 {
     <table class="tracksTable">
         <tr>
-            <th>Id</th>
             <th>Name</th>
             <th>Description</th>
 
@@ -20,8 +19,7 @@
         @foreach (var m in Model.Stations)
         {
             <tr>
-                <td>@m.Id</td>
-                <td>@m.Name</td>
+                <td style="min-width: 200px">@m.Name</td>
                 <td>@m.Description</td>
             </tr>
         }

@@ -19,7 +19,7 @@
         var token = localStorage.getItem("accessToken");
         var refreshToken = localStorage.getItem("refreshToken");
         var expiration = localStorage.getItem("expiration");
-        if (token != null && refreshToken != null) {
+
             $.get("/Home/UpdateAccessAsync", { "token": token, "refresh": refreshToken, "expire": expiration }, function (data) {
                 if (data && data != '') {
                     var dataObject = JSON.parse(data);
@@ -29,6 +29,6 @@
                     localStorage.setItem('clientId', dataObject.ClientId);
                 }
             });
-        }
+
     </script>
 </div>

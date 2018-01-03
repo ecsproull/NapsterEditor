@@ -12,15 +12,13 @@
 {
     <table class="tracksTable">
         <tr>
-            <th>Id</th>
             <th>Name</th>
             <th>Bio</th>
         </tr>
         @foreach (var m in Model.ArtistsList)
         {
             <tr>
-                <td>@m.Id</td>
-                <td>@m.Name</td>
+                <td style="min-width: 200px">@m.Name</td>
                 <td>@Html.Raw(@Model.GetArtistBio(m.Id))</td>
             </tr>
         }

@@ -1,4 +1,4 @@
-﻿@model TracksViewModel
+﻿@model TracksViewModel2
 
 @{
     Layout = "_StartLayout";
@@ -20,19 +20,21 @@
             @for (int i = 0; i < Model.TrackList.Count(); i++)
             {
                 <tr>
-                    <td>@Html.CheckBoxFor(x => x.TrackList.ElementAt(i).IsSelected)</td>
                     <td>
-                        @Model.TrackList.ElementAt(i).Name)
-                        @Html.HiddenFor(x => x.TrackList.ElementAt(i).Name)
+                        @Html.CheckBoxFor(model => model.TrackList[i].IsSelected)
                     </td>
                     <td>
-                        @Model.TrackList.ElementAt(i)].Artist
-                        @Html.HiddenFor(x => x.TrackList.ElementAt(i).ArtistName)
+                        @Model.TrackList[i].Name)
+                        @Html.HiddenFor(model => model.TrackList[i].Name)
                     </td>
                     <td>
-                        @Model.TrackList.ElementAt(i)].Album
-                        @Html.HiddenFor(x => x.TrackList.ElementAt(i).Id)
-                        @Html.HiddenFor(x => x.TrackList.ElementAt(i).AlbumName)
+                        @Model.TrackList[i].ArtistName
+                        @Html.HiddenFor(model => model.TrackList[i].ArtistName)
+                    </td>
+                    <td>
+                        @Model.TrackList[i].AlbumName
+                        @Html.HiddenFor(model => model.TrackList[i].Id)
+                        @Html.HiddenFor(model => model.TrackList[i].AlbumName)
                     </td>
                 </tr>
             }

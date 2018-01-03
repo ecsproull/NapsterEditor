@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CsharpSample.Models
 {
-    public class GenrePickerViewModel
+    public class GenrePickerViewModel : BaseViewModel
     {
         [Display(Name = "Genres")]
         public string SelectedGenreId { get; set; }

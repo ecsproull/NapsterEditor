@@ -15,7 +15,7 @@
         @foreach (var m in Model.Playlists)
         {
             <tr>
-                <td><a href="/PlayLists/ShowTracks?playlistId=@m.Id&trackCount=@m.TrackCount&playlistName=@m.Name">@m.Name</a></td>
+                <td><a href="/PlayLists/ShowTracks?playlistId=@m.Id&trackCount=@m.TrackCount&playlistName=@m.Name&returnUrl=@Model.OnNavigateReturnUrl">@m.Name</a></td>
                 <td>@m.TrackCount</td>
             </tr>
         }

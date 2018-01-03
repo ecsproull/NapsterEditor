@@ -1,0 +1,23 @@
+﻿@model TracksViewModel
+
+<table class="tracksTable">
+    <tr>
+        <th>Name</th>
+        @if (Model.ShowArtistName)
+        {<th>Artist</th>}
+        @if (Model.ShowAlbumName)
+        {<th>Album</th>}
+        <th>Preview</th>
+    </tr>
+    @foreach (var m in Model.TrackList)
+    {
+        <tr>
+            <td>@m.Name</td>
+            @if (Model.ShowArtistName)
+            {<td>@m.ArtistName</td>}
+            @if (Model.ShowAlbumName)
+            {<td><a href="/Search/ShowAlbumDetails?albumId=@m.AlbumId&returnUrl=@Model.OnNavigateReturnUrl">@m.AlbumName</a></td>}
+            <td><a onclick="playPreview('@m.PreviewURL')">Preview</a></td>
+        </tr>
+    }
+</table>

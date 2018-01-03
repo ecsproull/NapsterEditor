@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model BaseViewModel
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -12,8 +13,16 @@
 </head>
 <body>
     <div class="page-title" role="navigation">
-        <a href="/home/index">Home</a>
-        <p>@ViewBag.PageHeading</p>
+        @if (Model.ShowNavButton)
+        {
+            <a href="@Model.BackUrl">@Model.NavText</a>
+            
+            <p>@ViewBag.PageHeading</p>
+        }
+        else
+        {
+            <p style=" margin-left: 0px;">@ViewBag.PageHeading</p>
+        }
     </div>
     <div class="container-fluid text-center">
         @RenderBody()

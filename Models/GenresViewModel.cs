@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CsharpSample.Models
 {
-    public class GenresViewModel
+    public class GenresViewModel : BaseViewModel
     {
         [Display(Name = "Genres")]
         public string SelectedGenreId { get; set; }

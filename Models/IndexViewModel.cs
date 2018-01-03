@@ -9,7 +9,7 @@ namespace CsharpSample.Models
         public string Url { get; set; }
     }
 
-    public class IndexViewModel
+    public class IndexViewModel : BaseViewModel
     {
         public List<Action> Actions { get; set; } = new List<Action>();
 
@@ -49,6 +49,12 @@ namespace CsharpSample.Models
             {
                 Name = "Tracks for Me",
                 Url = "/home/GetTracksForMe"
+            });
+
+            Actions.Add(new Action
+            {
+                Name = "Search",
+                Url = "/search/Index"
             });
 
             Actions.Add(new Action

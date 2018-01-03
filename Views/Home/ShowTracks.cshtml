@@ -3,25 +3,9 @@
 @{
     ViewData["Title"] = "Tracks for ME";
     Layout = "~/Views/Shared/_StartLayout.cshtml";
-    ViewBag.PageHeading = "Tracks";
+    ViewBag.PageHeading = "Tracks for ME";
 }
 
 <div class="playlist">
-    <table class="tracksTable">
-        <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Artist</th>
-            <th>Album</th>
-        </tr>
-        @foreach (var m in Model.TrackList)
-        {
-            <tr>
-                <td>@m.Id</td>
-                <td>@m.Name</td>
-                <td>@m.ArtistName</td>
-                <td>@m.AlbumName</td>
-            </tr>
-        }
-    </table>
+    @Html.Partial("Tracks")
 </div>

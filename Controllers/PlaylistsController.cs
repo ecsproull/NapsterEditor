@@ -15,25 +15,26 @@ namespace CsharpSample.Controllers
         {
             if (string.IsNullOrWhiteSpace(AccessProperties.Token))
             {
-                LoginViewModel loginModel = new LoginViewModel();
-                loginModel.ContinueUrl = "/Playlists/ShowPlaylists";
                 return RedirectToAction("Login", "Home");
             }
             else
             {
                 PlayListsViewModel model = new PlayListsViewModel();
                 model.Playlists = await NapsterApiHelper.GetPlayListsAsync();
+                model.OnNavigateReturnUrl = "/Playlists/ShowPlaylists";
                 return View(model);
             }
         }
 
-        public async Task<ViewResult> ShowTracks(string playlistId, int trackCount, string playlistName)
+        public async Task<ViewResult> ShowTracks(string playlistId, int trackCount, string playlistName, string returnUrl)
         {
             currentModel = new TracksViewModel
             {
                 TrackList = await NapsterApiHelper.GetPlayListTracksAsync(playlistId, trackCount),
                 PlayListName = playlistName,
-                PlayListId = playlistId
+                PlayListId = playlistId,
+                BackUrl = returnUrl,
+                NavText = "Back"
             };
 
             return View(currentModel);
@@ -109,43 +110,45 @@ namespace CsharpSample.Controllers
                  return a.Name.CompareTo(b.Name);
              });
 
-            List<Track> dups = new List<Track>();
             Track previousTrack = new Track();
+
+            TracksViewModel2 model2 = new TracksViewModel2
+            {
+                PlayListId = currentModel.PlayListId,
+                PlayListName = currentModel.PlayListName,
+                TrackList = new List<Track>()
+            };
 
             foreach (Track td in playlistTracks)
             {
-                if (previousTrack.Name.ToUpperInvariant() == td.Name.ToUpperInvariant() &&
-                    previousTrack.ArtistName.ToUpperInvariant() == td.ArtistName.ToUpperInvariant())
+                if (!string.IsNullOrEmpty(previousTrack.Name))
                 {
-                    if (!dups.Contains(td))
+                    if (previousTrack.Name.ToUpperInvariant() == td.Name.ToUpperInvariant() &&
+                        previousTrack.ArtistName.ToUpperInvariant() == td.ArtistName.ToUpperInvariant())
                     {
-                        dups.Add(td);
-                    }
+                        if (!model2.TrackList.Contains(td))
+                        {
+                            model2.TrackList.Add(td);
+                        }
 
-                    if (!dups.Contains(previousTrack))
-                    {
-                        dups.Add(previousTrack);
+                        if (!model2.TrackList.Contains(previousTrack))
+                        {
+                            model2.TrackList.Add(previousTrack);
+                        }
                     }
                 }
 
                 previousTrack = td;
             }
 
-            if (dups.Count > 0)
+            if (model2.TrackList.Count > 0)
             {
-                TracksViewModel model = new TracksViewModel
-                {
-                    PlayListId = currentModel.PlayListId,
-                    TrackList = dups,
-                    PlayListName = currentModel.PlayListName
-                };
-
-                foreach (Track tdat in model.TrackList)
+                foreach (Track tdat in model2.TrackList)
                 {
                     tdat.IsSelected = true;
                 }
 
-                return View("DeDup", model);
+                return View("DeDup", model2);
             }
 
             return View("ShowTracks", currentModel);
@@ -177,7 +180,7 @@ namespace CsharpSample.Controllers
         }
 
         [HttpPost]
-        public ActionResult RemoveTracks(TracksViewModel model)
+        public ActionResult RemoveTracks(TracksViewModel2 model)
         {
             List<Track> tracks = new List<Track>(currentModel.TrackList);
             foreach (Track td in model.TrackList)

@@ -1,5 +1,4 @@
 {
-  "directory": "wwwroot/lib",
   "name": "asp.net",
   "private": true,
   "dependencies": {

@@ -11,11 +11,16 @@ namespace CsharpSample.Controllers
     public class PlaylistsController : Controller
     {
         private static TracksViewModel currentModel;
+        public async Task<ActionResult> Index()
+        {
+            return await ShowPlaylists();
+        }
+
         public async Task<ActionResult> ShowPlaylists()
         {
             if (string.IsNullOrWhiteSpace(AccessProperties.Token))
             {
-                return RedirectToAction("Login", "Home");
+                return RedirectToAction("Login", "Home", new { routeValue = "/Playlists/ShowPlaylists", navText = "Playlists" });
             }
             else
             {

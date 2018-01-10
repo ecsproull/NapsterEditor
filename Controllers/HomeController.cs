@@ -19,7 +19,7 @@ namespace CsharpSample.Controllers
 
     public class HomeController : Controller
     {
-        public ViewResult Index()
+        public ViewResult Index(string id = "")
         {
             IndexViewModel model = new IndexViewModel
             {
@@ -98,7 +98,7 @@ namespace CsharpSample.Controllers
             if (string.IsNullOrWhiteSpace(AccessProperties.Token))
             {
                 LoginViewModel loginModel = new LoginViewModel();
-                loginModel.ContinueUrl = "GetTracksForMe";
+                loginModel.BackUrl = "GetTracksForMe";
                 return View("Login", loginModel);
             }
 
@@ -112,10 +112,16 @@ namespace CsharpSample.Controllers
             return View("ShowTracks", model);
         }
 
-        public ActionResult Login(string routeValue)
+        public ActionResult Login(string routeValue, string navText)
         {
             LoginViewModel model = new LoginViewModel();
-            model.ContinueUrl = "Index";
+
+            if (!string.IsNullOrEmpty(routeValue))
+            {
+                model.BackUrl = routeValue;
+                model.NavText = navText;
+            }
+
             return View(model);
         }
 
